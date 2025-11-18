@@ -263,7 +263,11 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
         if (value) {
             if (mUpdaterController != null) {
                 mUpdate = mUpdaterController.getCurrentUpdate();
-                fetchChangelog(mUpdate.getTimestamp());
+                if (mUpdate != null) {
+                    fetchChangelog(mUpdate.getTimestamp());
+                } else {
+                    showSnackbar(R.string.snack_no_updates_found, Snackbar.LENGTH_SHORT);
+                }
             }
         } else if (mUpdaterPrefCategory != null && mChangelogPref != null) {
             mUpdaterPrefCategory.removePreference(mChangelogPref);
